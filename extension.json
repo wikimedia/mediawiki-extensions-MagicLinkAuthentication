@@ -1,0 +1,71 @@
+{
+	"name": "Magic Link Authentication",
+	"version": "0.1",
+	"author": [
+		"[https://www.mediawiki.org/wiki/User:Cindy.cicalese Cindy Cicalese]"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:MagicLinkAuthentication",
+	"descriptionmsg": "magicLinkAuthentication-desc",
+	"type": "other",
+	"license-name": "MIT",
+	"requires": {
+		"MediaWiki": ">= 1.39.0",
+		"extensions": {
+			"PluggableAuth": ">= 7.0"
+		}
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\MagicLinkAuthentication\\": "includes/"
+	},
+	"MessagesDirs": {
+		"EmailAuthentiction": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"MagicLinkAuthenticationAlias": "includes/MagicLinkAuthentication.alias.php"
+	},
+	"SpecialPages": {
+		"ContinueMagicLinkAuthentication": {
+			"class": "MediaWiki\\Extension\\MagicLinkAuthentication\\ContinueMagicLinkAuthentication"
+		}
+	},
+	"ServiceWiringFiles": [
+		"includes/ServiceWiring.php"
+	],
+	"HookHandlers": {
+		"schema": {
+			"class": "MediaWiki\\Extension\\MagicLinkAuthentication\\SchemaHooks"
+		}
+	},
+	"Hooks": {
+		"LoadExtensionSchemaUpdates": "schema"
+	},
+	"attributes": {
+		"PluggableAuth": {
+			"MagicLinkAuthentication": {
+				"class": "MediaWiki\\Extension\\MagicLinkAuthentication\\MagicLinkAuthentication",
+				"services": [
+					"MainConfig",
+					"AuthManager",
+					"Emailer",
+					"UserIdentityLookup",
+					"DBInterface",
+					"JWTHandler"
+				]
+			}
+		}
+	},
+	"config": {
+		"MagicLinkAuthentication_Secret": {
+			"value": null
+		},
+		"MagicLinkAuthentication_TokenLifetime": {
+			"value": 300
+		},
+		"MagicLinkAuthentication_EmailSender": {
+			"value": null
+		}
+	},
+	"manifest_version": 2
+}

@@ -1,0 +1,36 @@
+[
+	{
+		"name": "magic_link_auth",
+		"columns": [
+			{
+				"name": "mla_jwt",
+				"type": "string",
+				"options": { "notnull": true, "length": 1000 }
+			},
+			{
+				"name": "mla_iv",
+				"type": "string",
+				"options": { "notnull": true }
+			},
+			{
+				"name": "mla_email",
+				"type": "string",
+				"options": { "notnull": true }
+			},
+			{
+				"name": "mla_entropy",
+				"type": "string",
+				"options": { "notnull": true }
+			},
+			{
+				"name": "mla_expiry",
+				"type": "integer",
+				"options": { "unsigned": true, "notnull": true }
+			}
+		],
+		"indexes": [],
+		"pk": [
+			"mla_jwt"
+		]
+	}
+]

@@ -1,0 +1,12 @@
+{
+	"@metadata": {
+		"authors": [
+			"Cicalese"
+		]
+	},
+	"magicLinkAuthentication-desc": "Provides authentication using a magic link in conjunction with PluggableAuth",
+	"magic-link-authentication-default-button-message": "Send Magic Link",
+	"magic-link-authentication-missing-secret": "Magic link secret must be set.",
+	"magic-link-authentication-email-subject": "Login Link",
+	"magic-link-authentication-email-sent": "Magic Link sent. Check your email."
+}

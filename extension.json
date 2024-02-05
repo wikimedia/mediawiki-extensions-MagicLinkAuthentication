@@ -57,7 +57,10 @@
 		}
 	},
 	"config": {
-		"MagicLinkAuthentication_Secret": {
+		"MagicLinkAuthentication_SigningKey": {
+			"value": null
+		},
+		"MagicLinkAuthentication_EncryptionKey": {
 			"value": null
 		},
 		"MagicLinkAuthentication_TokenLifetime": {

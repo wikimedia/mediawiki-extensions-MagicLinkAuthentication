@@ -51,11 +51,12 @@ class JWTHandler {
 	}
 
 	/**
-	 * @param string $secret
+	 * @param string $signingKey
+	 * @param string $encryptionKey
 	 * @param string $email
 	 * @return string
 	 */
-	public function createToken( string $secret, string $email ): string {
+	public function createToken( string $signingKey, string $encryptionKey, string $email ): string {
 		$this->dbInterface->purgeExpiredTokens();
 
 		$header = [ 'typ' => 'JWT', 'alg' => 'HS256' ];
@@ -68,7 +69,7 @@ class JWTHandler {
 				'email' => $email,
 				'entropy' => $entropy
 			] ),
-			$secret,
+			$encryptionKey,
 			$iv
 		);
 		$now = time();
@@ -83,7 +84,7 @@ class JWTHandler {
 		$signature = hash_hmac(
 			'sha256',
 			$base64UrlHeader . "." . $base64UrlPayload,
-			$secret,
+			$signingKey,
 			true
 		);
 		$signature = $this->base64URLencode( $signature );
@@ -96,11 +97,12 @@ class JWTHandler {
 	}
 
 	/**
-	 * @param string $secret
+	 * @param string $signingKey
+	 * @param string $encryptionKey
 	 * @param string $token
 	 * @return ?string
 	 */
-	public function validateToken( string $secret, string $token ): ?string {
+	public function validateToken( string $signingKey, string $encryptionKey, string $token ): ?string {
 		$this->dbInterface->purgeExpiredTokens();
 		$data = $this->dbInterface->getToken( $token );
 		if ( !$data ) {
@@ -122,7 +124,7 @@ class JWTHandler {
 		$expectedSignature = hash_hmac(
 			'sha256',
 			$base64UrlHeader . '.' . $base64UrlPayload,
-			$secret,
+			$signingKey,
 			true
 		);
 		$expectedSignature = $this->base64URLencode( $expectedSignature );
@@ -144,7 +146,7 @@ class JWTHandler {
 			return null;
 		}
 		$iv = $data['iv'];
-		$private = json_decode( $this->decryptString( $payload['private'], $secret, $iv ), true );
+		$private = json_decode( $this->decryptString( $payload['private'], $encryptionKey, $iv ), true );
 
 		if ( !isset( $private['email' ] ) ) {
 			return null;

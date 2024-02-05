@@ -68,7 +68,12 @@ class MagicLinkAuthentication extends PluggableAuth {
 	/**
 	 * @var string
 	 */
-	private $secret;
+	private $signingKey;
+
+	/**
+	 * @var string
+	 */
+	private $encryptionKey;
 
 	/**
 	 * @var string
@@ -107,7 +112,8 @@ class MagicLinkAuthentication extends PluggableAuth {
 	 */
 	public function init( string $configId, array $config ): void {
 		parent::init( $configId, $config );
-		$this->secret = $this->getConfigValue( 'Secret' );
+		$this->signingKey = $this->getConfigValue( 'SigningKey' );
+		$this->encryptionKey = $this->getConfigValue( 'EncryptionKey' );
 		$this->jwtHandler->init( $this->getConfigValue( 'TokenLifetime' ) );
 		$this->emailSender = $this->getConfigValue( 'EmailSender' );
 		if ( !$this->emailSender ) {
@@ -154,7 +160,7 @@ class MagicLinkAuthentication extends PluggableAuth {
 		?string &$email,
 		?string &$errorMessage
 	): bool {
-		if ( $this->secret === null ) {
+		if ( $this->signingKey === null || $this->encryptionKey === null ) {
 			$errorMessage = ( new Message( "magic-link-authentication-missing-secret" ) )->text();
 			return false;
 		}
@@ -188,7 +194,7 @@ class MagicLinkAuthentication extends PluggableAuth {
 		?string &$realname,
 		?string &$email
 	): bool {
-		$email = $this->jwtHandler->validateToken( $this->secret, $code );
+		$email = $this->jwtHandler->validateToken( $this->signingKey, $this->encryptionKey, $code );
 		if ( !$email ) {
 			return false;
 		}
@@ -218,7 +224,7 @@ class MagicLinkAuthentication extends PluggableAuth {
 		$extraLoginFields =
 			$this->authManager->getAuthenticationSessionData( PluggableAuthLogin::EXTRALOGINFIELDS_SESSION_KEY );
 		$email = $extraLoginFields['email'];
-		$jwt = $this->jwtHandler->createToken( $this->secret, $email );
+		$jwt = $this->jwtHandler->createToken( $this->signingKey, $this->encryptionKey, $email );
 
 		$redirectURL = SpecialPage::getTitleFor( 'PluggableAuthLogin' )->getFullURL( [
 			'code' => $jwt

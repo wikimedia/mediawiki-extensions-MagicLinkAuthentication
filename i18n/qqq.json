@@ -4,7 +4,7 @@
 			"Cicalese"
 		]
 	},
-	"magicLinkAuthentication-desc": "{{desc|name=MagicLinkAuthentication|url=https://www.mediawiki.org/wiki/Extension:MagicLinkAuthentication}}",
+	"magic-link-authentication-desc": "{{desc|name=MagicLinkAuthentication|url=https://www.mediawiki.org/wiki/Extension:MagicLinkAuthentication}}",
 	"magic-link-authentication-default-button-message": "Default text for login button",
 	"magic-link-authentication-missing-secret": "Error message",
 	"magic-link-authentication-email-subject": "Email subject string",

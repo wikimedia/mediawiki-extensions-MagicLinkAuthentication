@@ -152,9 +152,11 @@ class JWTHandler {
 			return null;
 		}
 		if ( $data['email'] !== $private['email'] ) {
+			// this should never happen, since the JWT matched what was stored in the DB
 			return null;
 		}
 		if ( $data['entropy'] !== $private['entropy'] ) {
+			// this should never happen, since the JWT matched what was stored in the DB
 			return null;
 		}
 		return $private['email'];

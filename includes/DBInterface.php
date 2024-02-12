@@ -46,6 +46,10 @@ class DBInterface {
 	}
 
 	/**
+	 * Find a user in the user table given their email address. If there are multiple users that have a given email
+	 * address in the user table, the first account returned by the query will be used. This could happen if other
+	 * authentication extensions are in use or have been in use in the past for the wiki. This extension does not
+	 * prevent this situation.
 	 * @param string $email
 	 * @return ?array
 	 */

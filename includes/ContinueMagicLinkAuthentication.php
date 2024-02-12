@@ -21,7 +21,6 @@
 
 namespace MediaWiki\Extension\MagicLinkAuthentication;
 
-use Message;
 use UnlistedSpecialPage;
 
 class ContinueMagicLinkAuthentication extends UnlistedSpecialPage {
@@ -34,7 +33,7 @@ class ContinueMagicLinkAuthentication extends UnlistedSpecialPage {
 	 * @param string|null $subPage parameters (ignored)
 	 */
 	public function execute( $subPage ) {
-		$html = ( new Message( 'magic-link-authentication-email-sent' ) )->text();
+		$html = $this->msg( 'magic-link-authentication-email-sent' )->escaped();
 		$this->getOutput()->addHTML( $html );
 	}
 }

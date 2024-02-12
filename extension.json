@@ -18,7 +18,7 @@
 		"MediaWiki\\Extension\\MagicLinkAuthentication\\": "includes/"
 	},
 	"MessagesDirs": {
-		"EmailAuthentiction": [
+		"MagicLinkAuthentication": [
 			"i18n"
 		]
 	},
@@ -50,8 +50,8 @@
 					"AuthManager",
 					"Emailer",
 					"UserIdentityLookup",
-					"DBInterface",
-					"JWTHandler"
+					"MagicLinkAuthentication.DBInterface",
+					"MagicLinkAuthentication.JWTHandler"
 				]
 			}
 		}

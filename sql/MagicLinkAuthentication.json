@@ -4,26 +4,31 @@
 		"columns": [
 			{
 				"name": "mla_jwt",
+				"comment": "a magic link in the form of a JWT sent to a user attempting to log in",
 				"type": "string",
 				"options": { "notnull": true, "length": 1000 }
 			},
 			{
 				"name": "mla_iv",
+				"comment": "initialization vector used to encrypt/decrypt the magic link private payload in the JWT",
 				"type": "string",
 				"options": { "notnull": true }
 			},
 			{
 				"name": "mla_email",
+				"comment": "email address requesting authentication; must match what is in the JWT",
 				"type": "string",
 				"options": { "notnull": true }
 			},
 			{
 				"name": "mla_entropy",
+				"comment": "a bit of entropy; must match what is in the JWT",
 				"type": "string",
 				"options": { "notnull": true }
 			},
 			{
 				"name": "mla_expiry",
+				"comment": "Unix timestamp indicating when the JWT expires",
 				"type": "integer",
 				"options": { "unsigned": true, "notnull": true }
 			}

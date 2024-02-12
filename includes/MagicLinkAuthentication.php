@@ -150,8 +150,6 @@ class MagicLinkAuthentication extends PluggableAuth {
 	 * @param string|null &$email The user's email address
 	 * @param string|null &$errorMessage Returns a descriptive message if there's an error
 	 * @return bool true if the user has been authenticated and false otherwise
-	 * @since 1.0
-	 *
 	 */
 	public function authenticate(
 		?int &$id,
@@ -184,8 +182,6 @@ class MagicLinkAuthentication extends PluggableAuth {
 	 * @param string|null &$realname The user's real name
 	 * @param string|null &$email The user's email address
 	 * @return bool true if the user has been authenticated and false otherwise
-	 * @since 1.0
-	 *
 	 */
 	public function validateCode(
 		string $code,

@@ -24,17 +24,17 @@ namespace MediaWiki\Extension\MagicLinkAuthentication;
 use MediaWiki\MediaWikiServices;
 
 return [
-	'DBInterface' =>
+	'MagicLinkAuthentication.DBInterface' =>
 		static function ( MediaWikiServices $services ): DBInterface {
 			return new DBInterface(
 				$services->getDBLoadBalancerFactory(),
 				$services->getDBLoadBalancer()
 			);
 		},
-	'JWTHandler' =>
+	'MagicLinkAuthentication.JWTHandler' =>
 		static function ( MediaWikiServices $services ): JWTHandler {
 			return new JWTHandler(
-				$services->get( 'DBInterface' )
+				$services->get( 'MagicLinkAuthentication.DBInterface' )
 			);
 		},
 ];

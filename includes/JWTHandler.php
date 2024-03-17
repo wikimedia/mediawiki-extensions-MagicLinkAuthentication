@@ -110,7 +110,7 @@ class JWTHandler {
 		}
 		$this->dbInterface->deleteToken( $token );
 
-		list( $base64UrlHeader, $base64UrlPayload, $signature ) = explode( '.', $token );
+		[ $base64UrlHeader, $base64UrlPayload, $signature ] = explode( '.', $token );
 
 		$header = json_decode( $this->base64URLdecode( $base64UrlHeader ), true );
 

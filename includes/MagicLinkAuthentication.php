@@ -27,11 +27,11 @@ use MediaWiki\Auth\AuthManager;
 use MediaWiki\Extension\PluggableAuth\PluggableAuth;
 use MediaWiki\Extension\PluggableAuth\PluggableAuthLogin;
 use MediaWiki\Mail\Emailer;
+use MediaWiki\Title\Title;
 use MediaWiki\User\UserIdentity;
 use MediaWiki\User\UserIdentityLookup;
 use Message;
 use SpecialPage;
-use Title;
 
 class MagicLinkAuthentication extends PluggableAuth {
 
